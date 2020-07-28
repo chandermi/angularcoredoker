@@ -18,11 +18,11 @@ pipeline {
       }
     }
 	
-	stage('Docker Build Windows') {
-      agent any
-      steps {
-        bat 'docker build --pull -t core_angular:nanoserver -f Dockerfile.nanoserver-x64 .'
-      }
-    }
+	#stage('Docker Build Windows') {
+    #  agent any
+    #  steps {
+    #    bat 'docker build --pull -t core_angular:nanoserver -f Dockerfile.nanoserver-x64 .'
+    #  }
+    #}
   }
 }
