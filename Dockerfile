@@ -44,6 +44,5 @@ WORKDIR /app
 COPY --from=build /app ./
 RUN mkdir -p /app/ClientApp/dist
 COPY --from=nodebuilder /usr/src/app/dist/. /app/ClientApp/dist/
-docker export --output="latest.zip" red_panda
 ENTRYPOINT ["dotnet", "WebApp.dll"]
 
