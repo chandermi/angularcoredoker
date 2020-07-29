@@ -21,7 +21,7 @@ pipeline {
 	stage('Docker run') {
       agent any
       steps {
-        bat 'docker run --rm -it --name "core_container"  -p 8000:80 core_angular'
+        bat 'docker run --rm -it --name "core_container" core_angular'
       }
     }
 	
