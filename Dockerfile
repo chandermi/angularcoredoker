@@ -22,7 +22,7 @@ RUN mkdir /usr/src/app
 WORKDIR /usr/src/app
 
 # add `/usr/src/app/node_modules/.bin` to $PATH
-ENV PATH /usr/src/app/node_modules/.bin:$PATH
+#ENV PATH /usr/src/app/node_modules/.bin:$PATH
 
 
 # install and cache app dependencies
@@ -44,6 +44,5 @@ WORKDIR /app
 COPY --from=build /app ./
 RUN mkdir -p /app/ClientApp/dist
 COPY --from=nodebuilder /usr/src/app/dist/. /app/ClientApp/dist/
-
 ENTRYPOINT ["dotnet", "WebApp.dll"]
 
