@@ -8,6 +8,7 @@ pipeline {
       agent any
       steps {
         bat 'docker volume prune'
+		bat 'y'
       }
     }
    
