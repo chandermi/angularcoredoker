@@ -22,8 +22,8 @@ pipeline {
 		bat 'docker cp c_a:/app c:/output/build-${env.BRANCH_NAME}'
 		bat 'docker stop c_a'
     	bat 'docker rm c_a'
-		bat 'powershell Compress-Archive -LiteralPath "C:/output/build-${env.BRANCH_NAME}" -DestinationPath "C:/output/build${env.BRANCH_NAME}.zip" -Force'
-		bat rmdir "C:/output/build-${env.BRANCH_NAME}" /S /Q
+		bat 'powershell Compress-Archive -LiteralPath "C:/output/build-${env.BRANCH_NAME}" -DestinationPath "C:/output/build-${env.BRANCH_NAME}-${env.BUILD_NUMBER}.zip" -Force'
+		bat 'rmdir "C:/output/build-${env.BRANCH_NAME}" /S /Q'
       }
     }
 		
