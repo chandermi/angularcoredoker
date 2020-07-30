@@ -18,7 +18,7 @@ pipeline {
       agent any
       steps {
 		bat 'docker run --publish 8000:8080 --detach --name c_a core_angular'+env.BRANCH_NAME
-		bat 'mkdir -p C:/output/build-${env.BRANCH_NAME}'
+		bat 'mkdir -p C:/output/build-'+${env.BRANCH_NAME}
 		bat 'docker cp c_a:/app c:/output/build-${env.BRANCH_NAME}'
 		bat 'docker stop c_a'
     	bat 'docker rm c_a'
