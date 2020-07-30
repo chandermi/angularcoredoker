@@ -16,8 +16,9 @@ pipeline {
       agent any
       steps {
         bat 'docker build -t core_angular .'
-		bat 'docker run --publish 8000:8080 --detach --name bb core_angular'
+		bat 'docker run --publish 8000:8080 --detach --name c_a core_angular'
 		bat 'docker cp bb:/app c:/build'
+		bat 'docker stop c_a'
       }
     }
 		
