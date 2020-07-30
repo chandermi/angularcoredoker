@@ -17,13 +17,14 @@ pipeline {
     stage('Docker Build Linux') {
       agent any
       steps {
-		bat 'docker run --publish 8000:8080 --detach --name c_a core_angular'+env.BRANCH_NAME
-		bat 'mkdir -p C:/output/build-'+${env.BRANCH_NAME}
-		bat 'docker cp c_a:/app c:/output/build-${env.BRANCH_NAME}'
-		bat 'docker stop c_a'
-    	bat 'docker rm c_a'
-		bat 'powershell Compress-Archive -LiteralPath "C:/output/build-${env.BRANCH_NAME}" -DestinationPath "C:/output/build-${env.BRANCH_NAME}-${env.BUILD_NUMBER}.zip" -Force'
-		bat 'rmdir "C:/output/build-${env.BRANCH_NAME}" /S /Q'
+	    bat 'docker build --tag core_angular'+env.BUILD_NUMBER
+		bat 'docker run --publish 8000:8080 --detach --name c_a'+env.BUILD_NUMBER+' core_angular'+env.BUILD_NUMBER
+		bat 'mkdir -p C:/output/build-'+${env.BUILD_NUMBER}
+		bat 'docker cp c_a:/app c:/output/build-${env.BUILD_NUMBER}'
+		bat 'docker stop c_a'+env.BUILD_NUMBER
+    	bat 'docker rm c_a'+env.BUILD_NUMBER
+		bat 'powershell Compress-Archive -LiteralPath "C:/output/build-${env.BUILD_NUMBER}" -DestinationPath "C:/output/build-'+${env.BUILD_NUMBER}+'.zip" -Force'
+		bat 'rmdir "C:/output/build-${env.BUILD_NUMBER}" /S /Q'
       }
     }
 		
