@@ -3,8 +3,10 @@
 pipeline {
   agent none
   environment {
-        VERSION = '1.0.0'
-        DB_ENGINE    = 'sqlite'
+ 
+  DATE_TAG = java.time.LocalDate.now()
+  DATETIME_TAG = java.time.LocalDateTime.now()
+
   }
   stages {
    
@@ -19,10 +21,10 @@ pipeline {
     stage('Docker Build Linux') {
       agent any
       steps {
-		bat 'docker build -t core_angular$VERSION .'
-		bat 'docker run --publish 8000:8080 --detach --name c_a$VERSION core_angular$VERSION'
-		bat 'docker cp c_a$VERSION:/app c:/output/build_$VERSION'
-    	bat 'docker rm c_a$VERSION'
+		bat 'docker build -t core_angular${DATETIME_TAG} .'
+		bat 'docker run --publish 8000:8080 --detach --name c_a${DATETIME_TAG} core_angular${DATETIME_TAG}'
+		bat 'docker cp c_a${DATETIME_TAG}:/app c:/output/build_${DATETIME_TAG}'
+    	bat 'docker rm c_a${DATETIME_TAG}'
       }
     }
 		
