@@ -18,7 +18,7 @@ pipeline {
       agent any
       steps {
 	    bat 'docker build --tag core_angular .'
-		bat 'docker run --publish 801${env.BUILD_NUMBER}:8080 --detach --name c_a'+env.BUILD_NUMBER+' core_angular'
+		bat 'docker run --publish 8000:80 --detach --name c_a'+env.BUILD_NUMBER+' core_angular'
 		bat 'mkdir -p C:/output/build-'+${env.BUILD_NUMBER}
 		bat 'docker cp c_a:/app c:/output/build-${env.BUILD_NUMBER}'
 		bat 'docker stop c_a'+env.BUILD_NUMBER
