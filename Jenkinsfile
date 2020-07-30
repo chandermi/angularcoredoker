@@ -26,8 +26,8 @@ pipeline {
 		bat 'docker cp c_a:/app c:/output/build'
 		bat 'docker stop c_a'
     	bat 'docker rm c_a'
-		bat 'powershell Compress-Archive -LiteralPath "C:/output/build" -DestinationPath "C:/output/binaries/build.zip" -Force'
-		bat 'del /f "C:/output/build"'
+		bat 'powershell Compress-Archive -LiteralPath ${BUILDPATH} -DestinationPath ${}/build${EXECUTOR_NUMBER}.zip -Force'
+		bat 'del /f ${BUILDPATH}'
       }
     }
 		
