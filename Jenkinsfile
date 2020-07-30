@@ -18,7 +18,7 @@ pipeline {
     stage('Docker Build Linux') {
       agent any
       steps {
-	    echo 'Building Branch: "${ENV_NAME}"' + env.BRANCH_NAME
+	    echo 'Building Branch: ' + env.BRANCH_NAME + ${ENV_NAME}
 		bat 'docker build -t core_angular .'
 		bat 'docker run --publish 8000:8080 --detach --name c_a core_angular'
 		bat 'docker cp c_a:/app c:/output/build'
