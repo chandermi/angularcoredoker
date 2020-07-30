@@ -3,8 +3,7 @@
 pipeline {
   agent none
   environment {
-    
-        CurrentTime = new Date()
+        VERSION = '1.0.0'
         DB_ENGINE    = 'sqlite'
   }
   stages {
@@ -20,10 +19,10 @@ pipeline {
     stage('Docker Build Linux') {
       agent any
       steps {
-		bat 'docker build -t core_angular .'
-		bat 'docker run --publish 8000:8080 --detach --name c_a$CurrentTime core_angular'
-		bat 'docker cp bb:/app c:/output/build_$CurrentTime'
-    	bat 'docker stop c_a$CurrentTime'
+		bat 'docker build -t core_angular$VERSION .'
+		bat 'docker run --publish 8000:8080 --detach --name c_a$VERSION core_angular$VERSION'
+		bat 'docker cp c_a$VERSION:/app c:/output/build_$VERSION'
+    	bat 'docker rm c_a$VERSION'
       }
     }
 		
