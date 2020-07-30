@@ -24,6 +24,7 @@ pipeline {
 		bat 'docker build -t core_angular .'
 		bat 'docker run --publish 8000:8080 --detach --name c_a core_angular'
 		bat 'docker cp c_a:/app c:/output/build'
+		bat 'docker stop c_a'
     	bat 'docker rm c_a'
       }
     }
