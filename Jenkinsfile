@@ -23,6 +23,7 @@ pipeline {
 		bat 'docker cp c_a:/app "c:/output/build-'+env.BUILD_NUMBER+'"'
 		bat 'docker stop c_a'+env.BUILD_NUMBER
     	bat 'docker rm c_a'+env.BUILD_NUMBER
+		bat 'docker rmi core_angular'
 		bat 'powershell Compress-Archive -LiteralPath "C:/output/build-'+env.BUILD_NUMBER+'" -DestinationPath "C:/output/build-'+env.BUILD_NUMBER+'.zip" -Force'
       }
     }
