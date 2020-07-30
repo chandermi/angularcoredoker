@@ -9,7 +9,6 @@ COPY WebApp/*.csproj ./WebApp/
 RUN dotnet restore
 
 
-
 # copy everything else and build app
 COPY WebApp/. ./WebApp/
 WORKDIR /source/WebApp
@@ -44,5 +43,7 @@ WORKDIR /app
 COPY --from=build /app ./
 RUN mkdir -p /app/ClientApp/dist
 COPY --from=nodebuilder /usr/src/app/dist/. /app/ClientApp/dist/
+
+
 ENTRYPOINT ["dotnet", "WebApp.dll"]
 

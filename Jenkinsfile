@@ -8,6 +8,7 @@ pipeline {
       agent any
       steps {
         bat 'docker volume prune --force'
+		
       }
     }
    
@@ -15,6 +16,8 @@ pipeline {
       agent any
       steps {
         bat 'docker build -t core_angular .'
+		bat 'docker run --publish 8000:8080 --detach --name bb core_angular'
+		bat 'docker cp bb:/app c:/build'
       }
     }
 		
