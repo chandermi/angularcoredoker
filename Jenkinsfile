@@ -2,11 +2,8 @@
 
 pipeline {
   agent none
-  environment {
- 
-  DATE_TAG = java.time.LocalDate.now()
-  DATETIME_TAG = java.time.LocalDateTime.now()
-
+   environment {
+        ENV_NAME = "${env.BRANCH_NAME}"
   }
   stages {
    
@@ -21,6 +18,7 @@ pipeline {
     stage('Docker Build Linux') {
       agent any
       steps {
+	    echo 'Building Branch: ' + env.BRANCH_NAME
 		bat 'docker build -t core_angular .'
 		bat 'docker run --publish 8000:8080 --detach --name c_a core_angular'
 		bat 'docker cp c_a:/app c:/output/build'
