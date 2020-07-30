@@ -18,14 +18,13 @@ pipeline {
     stage('Docker Build Linux') {
       agent any
       steps {
-	    echo 'Building Branch: ' + env.BRANCH_NAME + ${ENV_NAME}
-		bat 'docker build -t core_angular .'
-		bat 'docker run --publish 8000:8080 --detach --name c_a core_angular'
+		bat 'docker build -t core_angular'+env.BRANCH_NAME+' .'
+		bat 'docker run --publish 8000:8080 --detach --name c_a core_angular'+env.BRANCH_NAME
 		bat 'docker cp c_a:/app c:/output/build'
 		bat 'docker stop c_a'
     	bat 'docker rm c_a'
-		bat 'powershell Compress-Archive -LiteralPath ${env.BUILDPATH} -DestinationPath ${env.BINARIESPATH}/build${EXECUTOR_NUMBER}.zip -Force'
-		bat 'del /f ${env.BUILDPATH}'
+		bat 'powershell Compress-Archive -LiteralPath "C:/output/build"'+env.BRANCH_NAME+' -DestinationPath "C:/output/build"'+EXECUTOR_NUMBER+'".zip" -Force'
+		bat 'del /f "C:/output/build"'
       }
     }
 		
