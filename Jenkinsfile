@@ -17,7 +17,6 @@ pipeline {
     stage('Docker Build Linux') {
       agent any
       steps {
-        bat 'dotnet sonarscanner begin /d:sonar.login=admin /d:sonar.password=saintech /k:"secretpwd"'
 	    bat 'docker build --tag core_angular'+env.BUILD_NUMBER+' .'
 		bat 'docker run --detach --name c_a'+env.BUILD_NUMBER+' core_angular'+env.BUILD_NUMBER
 		bat 'mkdir "C:/output/build-'+env.BUILD_NUMBER+'"'
@@ -26,7 +25,6 @@ pipeline {
     	bat 'docker rm c_a'+env.BUILD_NUMBER
 		bat 'docker rmi core_angular'+env.BUILD_NUMBER
 		bat 'powershell Compress-Archive -LiteralPath "C:/output/build-'+env.BUILD_NUMBER+'" -DestinationPath "C:/output/build-'+env.BUILD_NUMBER+'.zip" -Force'
-		bat 'dotnet sonarscanner end /d:sonar.login=admin /d:sonar.password=saintech'
       }
     }
 		
