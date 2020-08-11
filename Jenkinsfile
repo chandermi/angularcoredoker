@@ -24,7 +24,7 @@ pipeline {
 		bat 'docker stop c_a'+env.BUILD_NUMBER
     	bat 'docker rm c_a'+env.BUILD_NUMBER
 		bat 'docker rmi core_angular'+env.BUILD_NUMBER
-		bat 'powershell Compress-Archive -LiteralPath "C:/output/build-'+env.BUILD_NUMBER+'" -DestinationPath "C:/output/build-'+env.BUILD_NUMBER+'.zip" -Force'
+		bat 'powershell Compress-Archive -LiteralPath "C:/output/build-'+env.BUILD_NUMBER+'" -DestinationPath "C:/output/build-'+env.BUILD_NUMBER+'_'+env.BRANCH_NAME+'.zip" -Force'
       }
     }
 		
