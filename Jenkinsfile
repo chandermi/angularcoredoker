@@ -28,15 +28,6 @@ pipeline {
       }
     }
 	
-	 stage('SonarQube') {
-      agent any
-      steps {
-	    bat 'dotnet tool install –global dotnet-sonarscanner'
-		bat 'dotnet sonarscanner begin /d:sonar.login=admin /d:sonar.password=admin /k:”secretpwd”'
-		bat 'dotnet build'
-		bat 'dotnet sonarscanner end /d:sonar.login=admin /d:sonar.password=admin'
-      }
-    }
 		
   }
 }
