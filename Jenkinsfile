@@ -3,16 +3,9 @@
 pipeline {
   agent none
    environment {
-        ENV_NAME = "${env.BRANCH_NAME}"
+        
   }
   stages {
-   
-    stage('Docker Clean') {
-      agent any
-      steps {
-        bat 'docker volume prune --force'
-      }
-    }
    
     stage('Docker Build') {
       agent any
