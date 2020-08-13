@@ -2,9 +2,7 @@
 
 pipeline {
   agent none
-   environment {
-        
-  }
+   
   stages {
    
     stage('Docker Build') {
