@@ -57,7 +57,7 @@ pipeline {
 	 stage('SonarQube Analysys') {
       agent any
       steps {
-		bat 'dotnet sonarscanner begin /d:sonar.login=admin /d:sonar.password=admin /k:”secretpwd”'
+		bat 'dotnet sonarscanner begin /d:sonar.login=admin /d:sonar.password=admin /k:"secretpwd"'
 		bat 'dotnet build'
 		bat 'dotnet sonarscanner end /d:sonar.login=admin /d:sonar.password=admin'
       }
