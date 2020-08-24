@@ -67,8 +67,9 @@ pipeline {
 		
   }
     post {
+	agent any
     always {
-      echo "Performing cleanup..."
+        echo "Performing cleanup..."
      	bat 'docker stop c_a'+env.BUILD_NUMBER
     	bat 'docker rm c_a'+env.BUILD_NUMBER
 		bat 'docker rmi core_angular'+env.BUILD_NUMBER
