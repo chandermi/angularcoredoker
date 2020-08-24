@@ -36,6 +36,16 @@ pipeline {
       }
     }
 	
+	stage('Cleanup Docker') {
+      agent any
+      steps {
+ 	   	bat 'docker stop c_a'+env.BUILD_NUMBER
+    	bat 'docker rm c_a'+env.BUILD_NUMBER
+		bat 'docker rmi core_angular'+env.BUILD_NUMBER
+
+      }
+    }
+	
 	stage('Zip Build') {
       agent any
       steps {
@@ -65,14 +75,5 @@ pipeline {
       }
     }
 		
-  }
-    post {
-	agent any
-    always {
-        echo "Performing cleanup..."
-     	bat 'docker stop c_a'+env.BUILD_NUMBER
-    	bat 'docker rm c_a'+env.BUILD_NUMBER
-		bat 'docker rmi core_angular'+env.BUILD_NUMBER
-    }
   }
 }
